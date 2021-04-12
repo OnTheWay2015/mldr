@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{64DC4DBB-19C8-31BE-BEF9-D5FC40EA8929}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>mmloader</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v142</PlatformToolset>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mmloader.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">mmloader</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\_work\mmLoader\output\mmloader\x64\lib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mmloader.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">mmloader</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <AssemblerOutput>All</AssemblerOutput>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;EBUG;_WIN32_WINNT=0x0600;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;EBUG;_WIN32_WINNT=0x0600;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/_work/mmLoader/output/mmloader/include
+if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy_if_different D:/_work/mmLoader/src/mmloader/mmLoader.h D:/_work/mmLoader/output/mmloader/include/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <AssemblerOutput>All</AssemblerOutput>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;EBUG;NDEBUG;_WIN32_WINNT=0x0600;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;EBUG;NDEBUG;_WIN32_WINNT=0x0600;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\_work\mmLoader\src\mmloader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+      <Command>setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/_work/mmLoader/output/mmloader/include
+if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy_if_different D:/_work/mmLoader/src/mmloader/mmLoader.h D:/_work/mmLoader/output/mmloader/include/
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\_work\mmLoader\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/_work/mmLoader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/_work/mmLoader -BD:/_work/mmLoader/build --check-stamp-file D:/_work/mmLoader/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeCCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\_work\mmLoader\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/_work/mmLoader/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/_work/mmLoader -BD:/_work/mmLoader/build --check-stamp-file D:/_work/mmLoader/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeCCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeCXXCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeRCCompiler.cmake;D:\_work\mmLoader\build\CMakeFiles\3.16.2\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\_work\mmLoader\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\_work\mmLoader\src\mmLoader\mmLoader.h" />
+    <ClCompile Include="D:\_work\mmLoader\src\mmLoader\mmLoader.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\_work\mmLoader\build\ZERO_CHECK.vcxproj">
+      <Project>{72F18EF9-906D-3EE0-A9CB-5CFE6ECDD5D9}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
