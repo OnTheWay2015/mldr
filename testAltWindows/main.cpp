@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-
+#include "test_alt_win.h"
 #define MAX_LOADSTRING 100
 
 CRITICAL_SECTION g_cri;   //临界
@@ -54,31 +54,6 @@ int consoleAct() {
 
 
 
-
-void addWnd(HWND id)
-{
-	::EnterCriticalSection(&g_cri);
-
-	g_wnds.push_back(id);
-
-	::LeaveCriticalSection(&g_cri);
-}
-int getWndIdx(HWND id)
-{
-	::EnterCriticalSection(&g_cri);
-
-    for (auto i=0;i<g_wnds.size();i++)
-    {
-        if (id == g_wnds[i])
-        {
-	        ::LeaveCriticalSection(&g_cri);
-            return i;
-        }
-    }
-
-	::LeaveCriticalSection(&g_cri);
-    return -1;
-}
 
 
 
@@ -139,23 +114,22 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    auto wndidx = getWndIdx(hWnd);
     if (message != WM_GETICON)
     {//.faq  为什么一直有 WM_GETICON 消息
-        std::cout << "wnd["<<wndidx<<"] WndProc message v[" << message << "]"<< std::endl;
+        std::cout << std::hex<< "WndProc message v["  << message << "]"<< std::endl;
     }
 
     switch (message )
     {
     case WM_CREATE:
     {
-        addWnd(hWnd);
-        wndidx = getWndIdx(hWnd);
+        auto wndidx = 1;
         int x = 50 * wndidx;
         int y = 50 * wndidx;
         ::SetWindowPos(hWnd, nullptr,x,y,50,100, SWP_NOSIZE);
             //改变一个子窗口,弹出式窗口或顶层窗口的尺寸，位置和Z序。子窗口，弹出式窗口，
             //及顶层窗口根据它们在屏幕上出现的顺序排序,顶层窗口设置的级别最高，并且被设置为Z序的第一个窗口
+        ::ShowWindow(hWnd, true);
     }
         break;
     default:
@@ -166,130 +140,49 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
-DWORD WINAPI ThreadPorc(LPVOID lpParam)
-{
-
-	DWORD dwThreadId = ::GetCurrentThreadId();
-
-	HANDLE* hp = (HANDLE*)lpParam;
-	DWORD tid = *(DWORD*)hp;
-
-	HWND hWnd = ::CreateWindowW(
-        szWindowClass, //classname 
-        szTitle,        //windowname 
-        WS_POPUP,//WS_OVERLAPPEDWINDOW, //style, WS_POPUP 不带标题栏
-		0,  //x
-        0,  //y 
-        200, //w
-        100,  //h 
-        nullptr, 
-        nullptr, 
-        nullptr, 
-        nullptr); // szWindowClass 为前面注册的窗口类
-
-
-   ShowWindow(hWnd, true);
-   UpdateWindow(hWnd);
-
-   DWORD wtid = 0;
-	DWORD lpdwProcessId = 0;
-	wtid = GetWindowThreadProcessId(
-		hWnd,
-		&lpdwProcessId
-	);
-
-
-	auto mid = ::GetModuleHandleW(0);
-	std::cout << "get thread id:" << dwThreadId << ", wtid:" << wtid << ", lpdwProcessId:" << lpdwProcessId << ", mid:" << mid << ", tid:" << tid << std::endl;
-
-	MSG msg;
-	while (GetMessage(&msg, nullptr, 0, 0))
-	{
-		if (!TranslateAccelerator(msg.hwnd, 0, &msg))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-	}
-
-	while (1) {
-		Sleep(10);
-	}
-	return 0;
-}
-
-
-void test_thd()
-{
-    HANDLE hThread = 0;
-    DWORD dwThreadId;
-
-    HANDLE* hp = new HANDLE();
-
-    hThread = ::CreateThread(
-        NULL,           //默认安全属性
-        NULL,           //默认堆栈
-        ThreadPorc,     //线程入口方法
-        hp,           //默认的线程参数, 可以是 NULL
-        0,              //线程立即执行
-        &dwThreadId     //线程id
-    );
-
-    *hp = hThread;
-    std::cout << "thread id:" << dwThreadId << ", hp:"<< hp << ",hThread:"<< hThread  << std::endl;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
+    consoleAct(); //在界面初始化(InitInstance) 之前,会影响最小化的图标显示 .faq
+	Sleep(1000);
 
-    if (!InitInstance (hInstance, nCmdShow))
+    // 创建窗口
+    //CMainWindow wnd;
+
+
+    //CMainWindowB wnd;
+    CMainWindow wnd;
+    wnd.Create(NULL, CWindow::rcDefault, _T("My Window"), WS_OVERLAPPEDWINDOW, WS_EX_CLIENTEDGE, nullptr);
+
+
+
+    // 显示并更新窗口
+    wnd.ShowWindow(nCmdShow);
+    wnd.UpdateWindow();
+
+
+
+    MSG msg;
+    while (GetMessage(&msg, nullptr, 0, 0))
     {
-        return FALSE;
+        
+        if (msg.message == WM_CREATE)
+        {
+        
+            std::cout<< std::hex<< "on create, hWnd[0x" << msg.hwnd<< "]"<< std::endl;
+        
+        }
+        if (!TranslateAccelerator(msg.hwnd, 0, &msg))
+		{
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+		}
     }
 
-    consoleAct();
-		Sleep(3000);
-
-    std::cout << " wWinMain mid:"<<hInstance<< std::endl;
-
-    test_thd();
-    //    Sleep(1000);
-    //test_thd();
-    //    Sleep(1000);
-    //test_thd();
-
-    //MSG msg;
-	//while (GetMessage(&msg, nullptr, 0, 0))
-	//{
-	//	if (!TranslateAccelerator(msg.hwnd, 0, &msg))
-	//	{
-	//		TranslateMessage(&msg);
-	//		DispatchMessage(&msg);
-	//	}
-	//}
-	
-        
-        
-	while (1) {
-		Sleep(10000);
-	}
     return 0;
 }
-
 
 int APIENTRY wWinMain1(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -302,11 +195,20 @@ int APIENTRY wWinMain1(_In_ HINSTANCE hInstance,
     consoleAct(); //在界面初始化(InitInstance) 之前,会影响最小化的图标显示 .faq
 	Sleep(3000);
     
-    if (!InitInstance (hInstance, nCmdShow))
+    if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
 
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr); // szWindowClass 为前面注册的窗口类
+
+   if (!hWnd)
+   {
+      return FALSE;
+   }
+
+   g_hWnd = hWnd;
     MSG msg;
     while (GetMessage(&msg, nullptr, 0, 0))
     {
